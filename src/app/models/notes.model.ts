@@ -1,17 +1,11 @@
 import { model, Schema } from "mongoose";
+import { INotes } from "../interfaces/notes.interface";
 
-// create mongoose schema
-export const noteSchema = new Schema(
+// "    Hello World    "
+const noteSchema = new Schema<INotes>(
   {
-    title: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    content: {
-      type: String,
-      default: "",
-    },
+    title: { type: String, required: true, trim: true },
+    content: { type: String, default: "" },
     category: {
       type: String,
       enum: ["personal", "work", "study", "other"],
@@ -22,14 +16,8 @@ export const noteSchema = new Schema(
       default: false,
     },
     tags: {
-      label: {
-        type: String,
-        required: true,
-      },
-      color: {
-        type: String,
-        default: "gray",
-      },
+      label: { type: String, required: true },
+      color: { type: String, default: "gray" },
     },
   },
   {
@@ -38,5 +26,4 @@ export const noteSchema = new Schema(
   }
 );
 
-// create mongoose model
-export const Note = model("Note", noteSchema); // "Note" is model name
+export const Note = model<INotes>("Note", noteSchema);
