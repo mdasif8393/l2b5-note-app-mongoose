@@ -1,4 +1,4 @@
-import express, { Application, NextFunction, Request, Response } from "express";
+import express, { Application, Request, Response } from "express";
 import { noteRoutes } from "./controllers/notes.controller";
 import { usersRoutes } from "./controllers/user.controller";
 
