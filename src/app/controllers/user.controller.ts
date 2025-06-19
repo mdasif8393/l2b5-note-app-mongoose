@@ -27,8 +27,8 @@ usersRoutes.post("/create-user", async (req: Request, res: Response) => {
     // await user.save();
 
     //// custom static method to hash password
-    const password = await User.hashPassword(body.password);
-    body.password = password;
+    // const password = await User.hashPassword(body.password);
+    // body.password = password;
 
     const user = await User.create(body);
 

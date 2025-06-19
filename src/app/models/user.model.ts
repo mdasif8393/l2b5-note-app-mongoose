@@ -91,4 +91,9 @@ userSchema.static("hashPassword", async function (plainPassword) {
   return password;
 });
 
+// pre middleware to hash password before save in database
+userSchema.pre("save", async function () {
+  this.password = await bcrypt.hash(this.password, 10);
+});
+
 export const User = model<IUser, UserStaticMethods>("User", userSchema);
