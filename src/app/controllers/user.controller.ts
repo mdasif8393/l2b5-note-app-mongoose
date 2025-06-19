@@ -46,7 +46,25 @@ usersRoutes.post("/create-user", async (req: Request, res: Response) => {
   }
 });
 usersRoutes.get("/", async (req: Request, res: Response) => {
-  const users = await User.find();
+  const userEmail = req.query.email;
+
+  let users: any = [];
+
+  ////filter
+  // if (userEmail) {
+  //   users = await User.find({ email: userEmail });
+  // } else {
+  //   users = await User.find();
+  // }
+
+  ////sort
+  // users = await User.find().sort({ email: "desc" });
+
+  // skip
+  // users = await User.find().skip(2);
+
+  //limit
+  users = await User.find().limit(2);
 
   res.status(201).json({
     success: true,
