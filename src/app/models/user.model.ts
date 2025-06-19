@@ -7,6 +7,7 @@ import {
 } from "../interfaces/user.interface";
 import validator from "validator";
 import bcrypt from "bcryptjs";
+import { Note } from "./notes.model";
 
 const addressSchema = new Schema<IAddress>(
   {
@@ -92,8 +93,17 @@ userSchema.static("hashPassword", async function (plainPassword) {
 });
 
 // pre middleware to hash password before save in database
-userSchema.pre("save", async function () {
+userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
+
+//post middleware to delete notes of the specific user when delete
+userSchema.post("findOneAndDelete", async function (doc, next) {
+  if (doc) {
+    await Note.deleteMany({ user: doc._id });
+  }
+  next();
 });
 
 export const User = model<IUser, UserStaticMethods>("User", userSchema);
