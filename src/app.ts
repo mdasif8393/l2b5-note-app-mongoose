@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from "express";
-import { noteRoutes } from "./controllers/notes.controller";
-import { usersRoutes } from "./controllers/user.controller";
+import { noteRoutes } from "./app/controllers/notes.controller";
+import { usersRoutes } from "./app/controllers/user.controller";
 
 const app: Application = express();
 
